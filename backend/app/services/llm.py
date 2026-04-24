@@ -113,6 +113,7 @@ Answer in 3–4 sentences only."""
     try:
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
+            print("[LLM ERROR] GROQ_API_KEY is not set")
             return fallback_response()
 
         client = Groq(api_key=api_key)
@@ -141,5 +142,6 @@ Answer in 3–4 sentences only."""
 
         return clean
 
-    except Exception:
+    except Exception as e:
+        print(f"[LLM ERROR] {type(e).__name__}: {e}")
         return fallback_response()
