@@ -1,7 +1,6 @@
 import json
 import os
-
-from groq import Groq
+from importlib import import_module
 
 
 def _default_summary(issue_type: str = "general legal issue") -> dict:
@@ -16,6 +15,11 @@ def _default_summary(issue_type: str = "general legal issue") -> dict:
 def summarize_case(query: str) -> dict:
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
+        return _default_summary()
+
+    try:
+        Groq = import_module("groq").Groq
+    except (ModuleNotFoundError, AttributeError):
         return _default_summary()
 
     prompt = f"""You are a legal case summarization assistant for lawyers.

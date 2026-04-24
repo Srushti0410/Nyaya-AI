@@ -1,7 +1,6 @@
 import os
 import re
-
-from groq import Groq
+from importlib import import_module
 
 
 # ---------------- CLEANING ---------------- #
@@ -111,6 +110,12 @@ Explain the issue clearly, mention rights only if relevant (e.g. Article 21 for 
 Answer in 3–4 sentences only."""
 
     try:
+        try:
+            Groq = import_module("groq").Groq
+        except (ModuleNotFoundError, AttributeError):
+            print("[LLM ERROR] groq package is not installed")
+            return fallback_response()
+
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             print("[LLM ERROR] GROQ_API_KEY is not set")
