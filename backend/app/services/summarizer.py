@@ -17,6 +17,8 @@ def summarize_case(query: str) -> dict:
     if not api_key:
         return _default_summary()
 
+    model_name = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+
     try:
         Groq = import_module("groq").Groq
     except (ModuleNotFoundError, AttributeError):
@@ -45,7 +47,7 @@ User query:
     try:
         client = Groq(api_key=api_key)
         completion = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model=model_name,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=300,
             temperature=0.3,

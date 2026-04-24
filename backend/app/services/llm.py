@@ -121,9 +121,11 @@ Answer in 3–4 sentences only."""
             print("[LLM ERROR] GROQ_API_KEY is not set")
             return fallback_response()
 
+        model_name = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+
         client = Groq(api_key=api_key)
         completion = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model=model_name,
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},

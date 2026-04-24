@@ -30,8 +30,10 @@ def health():
     import os
     groq_set = bool(os.getenv("GROQ_API_KEY"))
     mongo_set = bool(os.getenv("MONGO_URI"))
+    groq_model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
     return {
         "status": "ok",
         "groq_key_set": groq_set,
         "mongo_uri_set": mongo_set,
+        "groq_model": groq_model,
     }
