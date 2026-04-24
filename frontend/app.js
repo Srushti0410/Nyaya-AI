@@ -127,7 +127,7 @@ let lawyersLoaded = false;
 let matchedLawyers = [];
 let matchedIssueType = '';
 let chatHistory = [];
-const API_BASE = window.NYAYA_API_BASE || 'http://127.0.0.1:8000';
+const API_BASE = window.NYAYA_API_BASE || 'https://nyaya-ai-hiaj.onrender.com';
 
 function qs(id) {
   return document.getElementById(id);
