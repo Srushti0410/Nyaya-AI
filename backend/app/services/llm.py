@@ -1,7 +1,7 @@
-import requests
+import os
 import re
 
-from app.config import LLM_MODEL, OLLAMA_URL
+from groq import Groq
 
 
 # ---------------- CLEANING ---------------- #
@@ -89,67 +89,48 @@ def fallback_response():
 def generate_answer(context_chunks, query, history=None):
     context = "\n\n".join(context_chunks) if context_chunks else ""
 
-    prompt = f"""
-You are an experienced Indian legal advisor.
+    system_prompt = (
+        "You are an experienced Indian legal advisor. "
+        "Answer clearly and confidently in 3-4 sentences. "
+        "Do NOT mention section numbers or Act names. "
+        "Do NOT ask questions. Be direct and suggest clear next steps."
+    )
 
-User situation:
+    user_prompt = f"""User situation:
 {query}
-
-IMPORTANT:
-- This is an ongoing conversation. Do NOT ask for details again.
-- Always answer based on the situation already given.
-
-INSTRUCTIONS:
-
-1. Identify the issue type:
-   - criminal (blackmail, photo leak, harassment)
-   - civil/property
-   - rights issue
-
-2. If the user asks about rights:
-   - For privacy/photo leak → mention Article 21 (privacy, dignity, liberty)
 
 STRICT RULES:
 - Do NOT mention ANY section numbers
 - Do NOT mention ANY Act names
-- Do NOT invent laws
-- Do NOT say "fraud" for blackmail cases
-- Use "blackmail" or "extortion"
+- Do NOT say "fraud" for blackmail cases — use "blackmail" or "extortion"
 - Do NOT ask questions
-- Do NOT reset conversation
 - Be confident and direct
 
-TASK:
-- Explain the issue clearly
-- Mention rights only if relevant
-- Suggest clear next steps (police complaint, cybercrime portal, evidence)
+Explain the issue clearly, mention rights only if relevant (e.g. Article 21 for privacy), and suggest clear next steps (police complaint, cybercrime portal, evidence preservation).
 
-Answer in 3–4 sentences only.
-"""
+Answer in 3–4 sentences only."""
 
     try:
-        response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": LLM_MODEL,
-                "prompt": prompt,
-                "stream": False,
-                "options": {
-                    "num_predict": 140
-                }
-            },
-            timeout=90,
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return fallback_response()
+
+        client = Groq(api_key=api_key)
+        completion = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_tokens=200,
+            temperature=0.4,
         )
 
-        response.raise_for_status()
-        data = response.json()
-
-        raw = data.get("response", "").strip()
+        raw = completion.choices[0].message.content.strip()
 
         if not raw:
             return fallback_response()
 
-        # 🔥 CLEAN PIPELINE
         clean = clean_output(raw)
         clean = remove_sections_and_acts(clean)
         clean = fix_articles(clean)

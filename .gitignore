@@ -20,8 +20,7 @@ env/
 .env
 .env.*
 
-# Vector DB binary files
-backend/data/vectordb/
+# Vector DB binary files - keep vectordb for deployment
 backend/data/processed/
 
 # IDE
