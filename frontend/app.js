@@ -150,7 +150,24 @@ async function apiPost(path, payload) {
   }
 
   if (!response.ok) {
-    const message = data?.detail || 'Request failed. Please try again.';
+    const detail = data?.detail;
+    let message = 'Request failed. Please try again.';
+
+    if (typeof detail === 'string' && detail.trim()) {
+      message = detail;
+    } else if (Array.isArray(detail) && detail.length) {
+      const first = detail[0];
+      if (typeof first === 'string' && first.trim()) {
+        message = first;
+      } else if (first && typeof first === 'object') {
+        const loc = Array.isArray(first.loc) ? first.loc.join('.') : '';
+        const msg = typeof first.msg === 'string' ? first.msg : '';
+        message = [loc, msg].filter(Boolean).join(': ') || JSON.stringify(first);
+      }
+    } else if (detail && typeof detail === 'object') {
+      message = detail.message || JSON.stringify(detail);
+    }
+
     throw new Error(message);
   }
 
@@ -350,6 +367,14 @@ async function sendMsg() {
 
   const txt = inp.value.trim();
   if (!txt) return;
+
+  if (txt.length < 3) {
+    addMsg('u', txt);
+    addMsg('ai', 'Please enter at least 3 characters so I can understand your legal issue.');
+    inp.value = '';
+    inp.focus();
+    return;
+  }
 
   const sendButton = document.querySelector('.send-btn');
   inp.value = '';
