@@ -3,6 +3,16 @@ import re
 from importlib import import_module
 
 
+LEGACY_MODEL_MAP = {
+    "llama3-8b-8192": "llama-3.1-8b-instant",
+}
+
+FALLBACK_MODELS = [
+    "llama-3.1-8b-instant",
+    "llama-3.3-70b-versatile",
+]
+
+
 # ---------------- CLEANING ---------------- #
 
 def clean_output(text: str) -> str:
@@ -121,18 +131,33 @@ Answer in 3–4 sentences only."""
             print("[LLM ERROR] GROQ_API_KEY is not set")
             return fallback_response()
 
-        model_name = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+        configured_model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+        model_name = LEGACY_MODEL_MAP.get(configured_model, configured_model)
 
         client = Groq(api_key=api_key)
-        completion = client.chat.completions.create(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            max_tokens=200,
-            temperature=0.4,
-        )
+        completion = None
+        candidate_models = [model_name] + [m for m in FALLBACK_MODELS if m != model_name]
+        for candidate in candidate_models:
+            try:
+                completion = client.chat.completions.create(
+                    model=candidate,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                    max_tokens=200,
+                    temperature=0.4,
+                )
+                break
+            except Exception as call_error:
+                err_text = str(call_error).lower()
+                if "model_decommissioned" in err_text or "decommissioned" in err_text:
+                    print(f"[LLM WARN] model unavailable: {candidate}")
+                    continue
+                raise
+
+        if completion is None:
+            return fallback_response()
 
         raw = completion.choices[0].message.content.strip()
 

@@ -3,6 +3,16 @@ import os
 from importlib import import_module
 
 
+LEGACY_MODEL_MAP = {
+    "llama3-8b-8192": "llama-3.1-8b-instant",
+}
+
+FALLBACK_MODELS = [
+    "llama-3.1-8b-instant",
+    "llama-3.3-70b-versatile",
+]
+
+
 def _default_summary(issue_type: str = "general legal issue") -> dict:
     return {
         "issue_type": issue_type,
@@ -17,7 +27,8 @@ def summarize_case(query: str) -> dict:
     if not api_key:
         return _default_summary()
 
-    model_name = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    configured_model = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    model_name = LEGACY_MODEL_MAP.get(configured_model, configured_model)
 
     try:
         Groq = import_module("groq").Groq
@@ -46,12 +57,25 @@ User query:
 
     try:
         client = Groq(api_key=api_key)
-        completion = client.chat.completions.create(
-            model=model_name,
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=300,
-            temperature=0.3,
-        )
+        completion = None
+        candidate_models = [model_name] + [m for m in FALLBACK_MODELS if m != model_name]
+        for candidate in candidate_models:
+            try:
+                completion = client.chat.completions.create(
+                    model=candidate,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=300,
+                    temperature=0.3,
+                )
+                break
+            except Exception as call_error:
+                err_text = str(call_error).lower()
+                if "model_decommissioned" in err_text or "decommissioned" in err_text:
+                    continue
+                raise
+
+        if completion is None:
+            return _default_summary()
 
         raw_output = (completion.choices[0].message.content or "").strip()
         if not raw_output:
