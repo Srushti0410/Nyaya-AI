@@ -1,6 +1,7 @@
-from sentence_transformers import SentenceTransformer
-
-model = SentenceTransformer("all-MiniLM-L6-v2")
+"""
+Stub — embeddings are no longer used.
+Kept so existing imports don't break.
+"""
 
 def embed_text(text):
-    return model.encode([text])
+    return [[]]

@@ -1,9 +1,10 @@
+"""
+RAG service — uses lightweight keyword search over constitution chunks.
+No ChromaDB or sentence-transformers required.
+"""
 import re
 
-from app.db.vector_store import get_collection
-from app.services.embeddings import embed_text
-
-collection = get_collection()
+from app.db.vector_store import keyword_search
 
 LEGAL_KEYWORDS = {
     "tenancy": [
@@ -73,65 +74,35 @@ def _extract_query_keywords(query: str) -> list[str]:
 def is_context_relevant(query: str, context_chunks: list[str]) -> bool:
     if not context_chunks:
         return False
-
     query_keywords = set(_extract_query_keywords(query))
     if not query_keywords:
         return False
-
     context_tokens = _tokenize(" ".join(context_chunks))
     overlap = query_keywords.intersection(context_tokens)
-
     if overlap:
         return True
-
-    # Fall back to phrase matching for obvious legal-situation terms.
     context_text = " ".join(context_chunks).lower()
-    return any(re.search(rf"\b{re.escape(keyword)}\b", context_text) for keyword in query_keywords)
+    return any(re.search(rf"\b{re.escape(kw)}\b", context_text) for kw in query_keywords)
 
 
-def filter_relevant_context(query: str, context_chunks: list[str], sources: list[str]) -> tuple[list[str], list[str], bool]:
+def filter_relevant_context(
+    query: str, context_chunks: list[str], sources: list[str]
+) -> tuple[list[str], list[str], bool]:
     relevant = is_context_relevant(query, context_chunks)
     if not relevant:
         return [], [], False
     return context_chunks, sources, True
 
-def retrieve_context(query, k=1):
+
+def retrieve_context(query: str, k: int = 3) -> tuple[list[str], list[str]]:
     """
-    Retrieve relevant context from the vector database.
-    
-    Args:
-        query: User query to retrieve context for
-        k: Number of top results to retrieve (default: 1 for strict relevance)
-    
-    Returns:
-        tuple: (documents: list of relevant text chunks, sources: list of article references)
-               Returns empty lists if no valid context found
+    Retrieve relevant constitution chunks using keyword search.
+    Returns (documents, sources).
     """
     try:
-        query_embedding = embed_text(query)[0].tolist()
-
-        results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=k
-        )
-
-        documents = results["documents"][0]
-        metadatas = results["metadatas"][0]
-
-        # Filter results: only include chunks that contain BOTH "article" AND "constitution"
-        valid_documents = []
-        valid_sources = []
-        
-        for doc, meta in zip(documents, metadatas):
-            # Check if metadata contains article reference and is from constitution
-            if ("article" in meta and meta.get("article")) and \
-               ("constitution" in str(meta).lower() or "constitution" in str(doc).lower()):
-                valid_documents.append(doc)
-                valid_sources.append(meta["article"])
-        
-        # Return empty context if no valid chunks found
-        return valid_documents, valid_sources
-    
-    except Exception as exc:
-        # Return empty context on error to trigger safe fallback
+        results = keyword_search(query, k=k)
+        documents = [r["text"] for r in results]
+        sources = [r.get("article", "") for r in results]
+        return documents, sources
+    except Exception:
         return [], []
