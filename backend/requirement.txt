@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pymongo
+pymupdf
+sentence-transformers
+faiss-cpu
+numpy
+requests
+bcrypt
+email-validator

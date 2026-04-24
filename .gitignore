@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+.venv-1/
+.venv-2/
+venv/
+env/
+
+# Environment variables
+.env
+.env.*
+
+# Vector DB binary files
+backend/data/vectordb/
+backend/data/processed/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

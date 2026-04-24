@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>NyayaAI - Profile</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="logo" href="home.html">
+      <div class="logo-mark">
+        <svg viewBox="0 0 17 17" fill="none" stroke="#c4973f" stroke-width="1.7">
+          <path d="M2 13l2.5-7.5L8.5 10l4-4.5L15 13H2z" />
+          <circle cx="2.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="8.5" cy="3" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="14.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+        </svg>
+      </div>
+      Nyaya<em>AI</em>
+    </a>
+    <div class="nav-links">
+      <a id="nl-home" href="home.html">Home</a>
+      <a id="nl-chat-page" href="chat.html">AI Consult</a>
+      <a id="nl-list-page" href="lawyers.html">Find Lawyers</a>
+      <a id="nl-login" href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='chat.html'">Start Free Consult -></button>
+  </nav>
+  <div class="page active" id="profile-page">
+    <div class="profile-header" id="profHeader"></div>
+    <div class="profile-body">
+      <div class="prof-main" id="profMain"></div>
+      <div class="prof-side" id="profSide"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>

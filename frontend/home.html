@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>NyayaAI - Home</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="logo" href="home.html">
+      <div class="logo-mark">
+        <svg viewBox="0 0 17 17" fill="none" stroke="#c4973f" stroke-width="1.7">
+          <path d="M2 13l2.5-7.5L8.5 10l4-4.5L15 13H2z" />
+          <circle cx="2.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="8.5" cy="3" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="14.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+        </svg>
+      </div>
+      Nyaya<em>AI</em>
+    </a>
+    <div class="nav-links">
+      <a id="nl-home" href="home.html">Home</a>
+      <a id="nl-chat-page" href="chat.html">AI Consult</a>
+      <a id="nl-list-page" href="lawyers.html">Find Lawyers</a>
+      <a id="nl-login" href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='chat.html'">Start Free Consult -></button>
+  </nav>
+  <div class="page active" id="home">
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-line"></div>
+      <div>
+        <div class="pill"><span class="pill-dot"></span>NyayaAI - India's Legal Platform</div>
+        <h1 class="hero-title">Your rights.<br><i>Understood.</i><br>Defended.</h1>
+        <p class="hero-sub">Describe your situation to our AI counsel. Get instant analysis of your rights and options
+          -
+          then connect with a verified lawyer matched to your exact case.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="go('chat-page')">Talk to AI Now -></button>
+          <button class="btn-ghost" onclick="go('list-page')">Browse Lawyers</button>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hs-num">12k+</div>
+            <div class="hs-lbl">Cases Assisted</div>
+          </div>
+          <div>
+            <div class="hs-num">340+</div>
+            <div class="hs-lbl">Verified Lawyers</div>
+          </div>
+          <div>
+            <div class="hs-num">98%</div>
+            <div class="hs-lbl">Satisfaction</div>
+          </div>
+          <div>
+            <div class="hs-num">4.9★</div>
+            <div class="hs-lbl">Avg. Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="flow-card">
+          <div class="fc-label">How NyayaAI Works</div>
+          <div class="flow-steps">
+            <div class="flow-step"><span class="fs-num">1</span>Describe your legal situation to AI</div>
+            <div class="flow-step"><span class="fs-num">2</span>AI analyzes and asks key questions</div>
+            <div class="flow-step"><span class="fs-num">3</span>Matched lawyers appear instantly</div>
+            <div class="flow-step"><span class="fs-num">4</span>Book a direct consultation</div>
+          </div>
+        </div>
+        <div class="match-card">
+          <div class="mc-head">Matched Lawyers - Property Dispute</div>
+          <div class="mc-row">
+            <div class="mc-av" style="background:linear-gradient(135deg,#0f0f24,#8c1f1f)">AK</div>
+            <div>
+              <div class="mc-name">Adv. Anika Kapoor</div>
+              <div class="mc-spec">Property - Bombay HC</div>
+            </div>
+            <div class="mc-pct">96%</div>
+          </div>
+          <div class="mc-row">
+            <div class="mc-av" style="background:linear-gradient(135deg,#1a3a2e,#2d6a4f)">RS</div>
+            <div>
+              <div class="mc-name">Adv. Rajan Sharma</div>
+              <div class="mc-spec">Civil - Supreme Court</div>
+            </div>
+            <div class="mc-pct">91%</div>
+          </div>
+          <div class="mc-row">
+            <div class="mc-av" style="background:linear-gradient(135deg,#2a1a3a,#5a2d8a)">PM</div>
+            <div>
+              <div class="mc-name">Adv. Priya Mehta</div>
+              <div class="mc-spec">Tenant - District Court</div>
+            </div>
+            <div class="mc-pct">87%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section">
+      <div class="eyebrow">The Process</div>
+      <h2 class="h2">Three steps to legal clarity</h2>
+      <p class="lead">No confusing jargon. Just clear AI guidance followed by the right expert for your case.</p>
+      <div class="steps-grid">
+        <div class="step-tile">
+          <div class="st-n">01</div>
+          <div class="st-icon"><svg viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg></div>
+          <div class="st-title">Describe Your Case</div>
+          <p class="st-desc">Tell the AI what happened - in plain language. No legal background required.</p>
+        </div>
+        <div class="step-tile">
+          <div class="st-n">02</div>
+          <div class="st-icon"><svg viewBox="0 0 24 24" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg></div>
+          <div class="st-title">AI Analyzes & Clarifies</div>
+          <p class="st-desc">Our AI asks 2-3 targeted questions to understand your situation fully, then identifies
+            your
+            legal options.</p>
+        </div>
+        <div class="step-tile">
+          <div class="st-n">03</div>
+          <div class="st-icon"><svg viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg></div>
+          <div class="st-title">Connect with Lawyers</div>
+          <p class="st-desc">Matched lawyers appear with fit scores. View profiles, compare fees, and book directly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="areas-section">
+      <div class="eyebrow">Coverage</div>
+      <h2 class="h2">Practice Areas</h2>
+      <p class="lead">Every major area of Indian law, covered by verified specialists.</p>
+      <div class="areas-grid">
+        <div class="area-card" onclick="goChat('My landlord is refusing to return my security deposit')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg></div>
+          <div class="ac-name">Property & Tenancy</div>
+          <p class="ac-desc">Disputes, ownership, landlord-tenant, encroachment, land acquisition.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I have a business contract dispute')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+            </svg></div>
+          <div class="ac-name">Corporate & Business</div>
+          <p class="ac-desc">Contracts, compliance, shareholder disputes, startup law, M&A.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I need help with a divorce matter')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg></div>
+          <div class="ac-name">Family & Personal</div>
+          <p class="ac-desc">Divorce, custody, alimony, adoption, succession, guardianship.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I have a criminal case or FIR against me')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg></div>
+          <div class="ac-name">Criminal Defence</div>
+          <p class="ac-desc">FIR, bail, anticipatory bail, trial defence, criminal appeals.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I was cheated by a company or product')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg></div>
+          <div class="ac-name">Consumer Protection</div>
+          <p class="ac-desc">Fraud, defective goods, e-commerce disputes, unfair practices.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I am a victim of online fraud or cyber crime')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg></div>
+          <div class="ac-name">Cyber & IT Law</div>
+          <p class="ac-desc">Online fraud, data breaches, cyber harassment, digital IP.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I was wrongfully terminated from my job')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg></div>
+          <div class="ac-name">Labour & Employment</div>
+          <p class="ac-desc">Wrongful termination, workplace harassment, PF/ESI disputes.</p>
+        </div>
+        <div class="area-card" onclick="goChat('I have a cheque bounce or loan default case')">
+          <div class="ac-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" fill="none">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </svg></div>
+          <div class="ac-name">Banking & Finance</div>
+          <p class="ac-desc">Cheque bounces, loan defaults, NPA, debt recovery, banking fraud.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lawyers-strip">
+      <div class="eyebrow">Our Network</div>
+      <h2 class="h2">Verified Lawyers</h2>
+      <p class="lead">Hand-picked advocates across India with proven track records. Every lawyer is background-checked
+        and bar council verified.</p>
+      <div class="ls-cards">
+        <div class="ls-card fu fu1" onclick="showProfile(0)">
+          <div class="lsc-top">
+            <div class="lsc-av" style="background:linear-gradient(135deg,#0f0f24,#8c1f1f)">AK</div>
+            <div>
+              <div class="lsc-name">Adv. Anika Kapoor</div>
+              <div class="lsc-title">Senior Advocate - 14 yrs</div>
+            </div>
+            <div class="lsc-match">96% match</div>
+          </div>
+          <div class="lsc-tags"><span class="lsc-tag">Property Law</span><span class="lsc-tag">Tenant Rights</span><span
+              class="lsc-tag">Civil</span></div>
+          <div class="lsc-footer"><span class="lsc-exp">Bombay High Court</span><button class="lsc-btn"
+              onclick="event.stopPropagation();showProfile(0)">View Profile</button></div>
+        </div>
+        <div class="ls-card fu fu2" onclick="showProfile(1)">
+          <div class="lsc-top">
+            <div class="lsc-av" style="background:linear-gradient(135deg,#1a3a2e,#2d6a4f)">RS</div>
+            <div>
+              <div class="lsc-name">Adv. Rajan Sharma</div>
+              <div class="lsc-title">Partner - 22 yrs</div>
+            </div>
+            <div class="lsc-match">91% match</div>
+          </div>
+          <div class="lsc-tags"><span class="lsc-tag">Labour Law</span><span class="lsc-tag">Employment</span><span
+              class="lsc-tag">Corporate</span></div>
+          <div class="lsc-footer"><span class="lsc-exp">Supreme Court of India</span><button class="lsc-btn"
+              onclick="event.stopPropagation();showProfile(1)">View Profile</button></div>
+        </div>
+        <div class="ls-card fu fu3" onclick="showProfile(3)">
+          <div class="lsc-top">
+            <div class="lsc-av" style="background:linear-gradient(135deg,#2e2a1a,#8a6a1c)">VK</div>
+            <div>
+              <div class="lsc-name">Adv. Varun Kumar</div>
+              <div class="lsc-title">Criminal Specialist - 17 yrs</div>
+            </div>
+            <div class="lsc-match">89% match</div>
+          </div>
+          <div class="lsc-tags"><span class="lsc-tag">Criminal</span><span class="lsc-tag">Bail</span><span
+              class="lsc-tag">White Collar</span></div>
+          <div class="lsc-footer"><span class="lsc-exp">Delhi High Court</span><button class="lsc-btn"
+              onclick="event.stopPropagation();showProfile(3)">View Profile</button></div>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <button class="btn-primary" onclick="go('list-page')">View All 340+ Lawyers -></button>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="eyebrow" style="text-align:center">Free to Start</div>
+      <h2 class="h2">Don't face legal challenges <i>alone</i>.</h2>
+      <p class="lead">Your first AI consultation is completely free. Understand your case in minutes, then connect with
+        the right lawyer.</p>
+      <div class="cta-banner-btns">
+        <button class="btn-primary" onclick="go('chat-page')">Start Free Consultation </button>
+        <button class="btn-ghost" onclick="go('list-page')">Browse All Lawyers</button>
+      </div>
+    </section>
+
+    <footer>
+      <div class="ft-grid">
+        <div class="ft-brand">
+          <div class="logo" style="margin-bottom:10px">Nyaya<em>AI</em></div>
+          <p>Legal counsel, intelligently within reach. AI-powered guidance for every Indian citizen - free to start.
+          </p>
+        </div>
+        <div class="ft-col">
+          <h4>Platform</h4><a onclick="go('chat-page')">AI Consultation</a><a onclick="go('list-page')">Find a
+            Lawyer</a><a>Case Tracker</a><a>Document Review</a>
+        </div>
+        <div class="ft-col">
+          <h4>Company</h4><a>About NyayaAI</a><a>For Lawyers</a><a>Blog</a><a>Careers</a>
+        </div>
+        <div class="ft-col">
+          <h4>Legal</h4><a>Privacy Policy</a><a>Terms of Use</a><a>Disclaimer</a>
+        </div>
+      </div>
+      <div class="ft-bottom"><span>© 2025 NyayaAI Technologies Pvt. Ltd. All rights reserved.</span><span>Not a
+          substitute for professional legal advice.</span></div>
+    </footer>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     AI CHAT PAGE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <script src="app.js"></script>
+</body>
+
+</html>

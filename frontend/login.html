@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>NyayaAI - Login</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="logo" href="home.html">
+      <div class="logo-mark">
+        <svg viewBox="0 0 17 17" fill="none" stroke="#c4973f" stroke-width="1.7">
+          <path d="M2 13l2.5-7.5L8.5 10l4-4.5L15 13H2z" />
+          <circle cx="2.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="8.5" cy="3" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="14.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+        </svg>
+      </div>
+      Nyaya<em>AI</em>
+    </a>
+    <div class="nav-links">
+      <a id="nl-home" href="home.html">Home</a>
+      <a id="nl-chat-page" href="chat.html">AI Consult</a>
+      <a id="nl-list-page" href="lawyers.html">Find Lawyers</a>
+      <a id="nl-login" href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='chat.html'">Start Free Consult</button>
+  </nav>
+
+  <div class="page active" id="auth-page">
+    <section class="auth-shell">
+      <div class="auth-bg"></div>
+      <div class="auth-card">
+        <div class="eyebrow">Secure Access</div>
+        <h1 class="auth-title">Welcome to NyayaAI</h1>
+        <p class="auth-sub">Sign in to continue your legal consultation journey or create a new account in seconds.</p>
+
+        <div class="auth-switch" role="tablist" aria-label="Authentication mode selector">
+          <button id="tab-signin" class="auth-tab on" onclick="switchAuth('signin')" type="button">Sign In</button>
+          <button id="tab-signup" class="auth-tab" onclick="switchAuth('signup')" type="button">Sign Up</button>
+        </div>
+
+        <form id="signin-form" class="auth-form" onsubmit="handleSignIn(event)">
+          <label class="auth-label" for="signin-email">Email Address</label>
+          <input id="signin-email" class="auth-input" type="email" required placeholder="you@example.com">
+
+          <label class="auth-label" for="signin-password">Password</label>
+          <input id="signin-password" class="auth-input" type="password" required minlength="6"
+            placeholder="Enter your password">
+
+          <button class="btn-primary auth-btn" type="submit">Sign In</button>
+        </form>
+
+        <form id="signup-form" class="auth-form hidden" onsubmit="handleSignUp(event)">
+          <label class="auth-label" for="signup-name">Full Name</label>
+          <input id="signup-name" class="auth-input" type="text" required placeholder="Your full name">
+
+          <label class="auth-label" for="signup-email">Email Address</label>
+          <input id="signup-email" class="auth-input" type="email" required placeholder="you@example.com">
+
+          <label class="auth-label" for="signup-password">Password</label>
+          <input id="signup-password" class="auth-input" type="password" required minlength="6"
+            placeholder="Create a strong password">
+
+          <button class="btn-primary auth-btn" type="submit">Create Account</button>
+        </form>
+
+        <p id="auth-message" class="auth-message" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

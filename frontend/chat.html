@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>NyayaAI - AI Consult</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="logo" href="home.html">
+      <div class="logo-mark">
+        <svg viewBox="0 0 17 17" fill="none" stroke="#c4973f" stroke-width="1.7">
+          <path d="M2 13l2.5-7.5L8.5 10l4-4.5L15 13H2z" />
+          <circle cx="2.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="8.5" cy="3" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="14.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+        </svg>
+      </div>
+      Nyaya<em>AI</em>
+    </a>
+    <div class="nav-links">
+      <a id="nl-home" href="home.html">Home</a>
+      <a id="nl-chat-page" href="chat.html">AI Consult</a>
+      <a id="nl-list-page" href="lawyers.html">Find Lawyers</a>
+      <a id="nl-login" href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='chat.html'">Start Free Consult -></button>
+  </nav>
+  <div class="page active" id="chat-page">
+    <div class="chat-wrap">
+
+      <!-- Chat column -->
+      <div class="chat-col">
+        <div class="chat-bar">
+          <div class="chatbar-av">N</div>
+          <div>
+            <div class="chatbar-name">NyayaAI Counsel <span class="online-dot"></span></div>
+            <div class="chatbar-status">AI Legal Advisor - Confidential - Available 24/7</div>
+          </div>
+          <div class="step-progress">
+            <span class="sp-label" id="spLabel">Awaiting your case</span>
+            <div class="sp-steps">
+              <div class="sp-dot" id="sp1"></div>
+              <div class="sp-dot" id="sp2"></div>
+              <div class="sp-dot" id="sp3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msgs" id="msgs">
+          <div class="msg ai">
+            <div class="m-av">N</div>
+            <div class="bubble">Welcome to <strong>NyayaAI</strong>. I'm your AI legal advisor - here to help you
+              understand your rights and options. Everything you share is <strong>strictly
+                confidential</strong>.<br><br>Please describe your legal situation below. What has happened?</div>
+          </div>
+        </div>
+
+        <div class="chips" id="chips">
+          <div class="chip" onclick="useChip(this)">Landlord won't return my deposit</div>
+          <div class="chip" onclick="useChip(this)">I was wrongfully terminated</div>
+          <div class="chip" onclick="useChip(this)">Cheque bounce / dishonour</div>
+          <div class="chip" onclick="useChip(this)">Property ownership dispute</div>
+          <div class="chip" onclick="useChip(this)">Online fraud / cyber crime</div>
+          <div class="chip" onclick="useChip(this)">Divorce or family matter</div>
+        </div>
+
+        <div class="chat-input-row">
+          <input type="text" id="inp" placeholder="Describe your legal issue..."
+            onkeypress="if(event.key==='Enter')sendMsg()">
+          <button class="send-btn" onclick="sendMsg()">
+            <svg viewBox="0 0 20 20">
+              <path d="M3 10l14-7-5 7 5 7-14-7z" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lawyer panel -->
+      <div class="panel-col">
+        <div class="panel-head">
+          <div class="panel-head-title">Matched Lawyers</div>
+          <div class="panel-head-sub" id="panelSub">Describe your case to see matches</div>
+        </div>
+        <div class="panel-body" id="lawyer-list">
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" stroke-width="1.7">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg></div>
+            <div class="empty-title">No matches yet</div>
+            <div class="empty-sub">Once you describe your case and answer a couple of questions, we'll show the
+              best-matched lawyers here.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     LAWYERS LIST PAGE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <script src="app.js"></script>
+</body>
+
+</html>

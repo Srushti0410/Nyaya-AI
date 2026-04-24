@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>NyayaAI - Find Lawyers</title>
+</head>
+
+<body>
+  <nav class="nav">
+    <a class="logo" href="home.html">
+      <div class="logo-mark">
+        <svg viewBox="0 0 17 17" fill="none" stroke="#c4973f" stroke-width="1.7">
+          <path d="M2 13l2.5-7.5L8.5 10l4-4.5L15 13H2z" />
+          <circle cx="2.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="8.5" cy="3" r="1.4" fill="#c4973f" stroke="none" />
+          <circle cx="14.5" cy="5" r="1.4" fill="#c4973f" stroke="none" />
+        </svg>
+      </div>
+      Nyaya<em>AI</em>
+    </a>
+    <div class="nav-links">
+      <a id="nl-home" href="home.html">Home</a>
+      <a id="nl-chat-page" href="chat.html">AI Consult</a>
+      <a id="nl-list-page" href="lawyers.html">Find Lawyers</a>
+      <a id="nl-login" href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="window.location.href='chat.html'">Start Free Consult -></button>
+  </nav>
+  <div class="page active" id="list-page">
+    <div class="list-hero">
+      <div class="eyebrow">Our Network</div>
+      <h1 class="list-hero-title">Find Your Lawyer</h1>
+      <p class="list-hero-sub">340+ verified advocates across India. Each lawyer is background-checked, bar council
+        verified, and rated by real clients.</p>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Filter by:</span>
+      <div class="f-chip on" onclick="filter(this,'all')">All Areas</div>
+      <div class="f-chip" onclick="filter(this,'property')">Property</div>
+      <div class="f-chip" onclick="filter(this,'corporate')">Corporate</div>
+      <div class="f-chip" onclick="filter(this,'family')">Family</div>
+      <div class="f-chip" onclick="filter(this,'criminal')">Criminal</div>
+      <div class="f-chip" onclick="filter(this,'labour')">Labour</div>
+      <div class="f-chip" onclick="filter(this,'cyber')">Cyber</div>
+    </div>
+    <div class="grid-wrap">
+      <div class="lawyers-grid" id="lawyersGrid"></div>
+    </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     PROFILE PAGE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <script src="app.js"></script>
+</body>
+
+</html>
