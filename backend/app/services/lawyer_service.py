@@ -1,6 +1,6 @@
 from pymongo.errors import PyMongoError
 
-from app.db.mongo import lawyers_collection
+from app.db.mongo import get_lawyers_collection
 
 
 CASE_TYPE_TO_QUERY = {
@@ -150,6 +150,7 @@ def recommend_lawyers(query: str, issue_type: str | None = None) -> list[dict]:
     specializations = _normalize_specializations(case_type)
 
     try:
+        lawyers_collection = get_lawyers_collection()
         regex_filters = [{"specialization": {"$regex": term, "$options": "i"}} for term in specializations]
         regex_filters.append({"specialization": {"$regex": case_type, "$options": "i"}})
 

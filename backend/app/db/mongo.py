@@ -3,23 +3,39 @@ from pymongo.errors import PyMongoError
 
 from app.config import DB_NAME, MONGO_URI
 
-
-def _create_mongo_client() -> MongoClient:
-	if not MONGO_URI:
-		raise RuntimeError("MONGO_URI is not set. Provide your MongoDB Atlas connection string in environment variables.")
-
-	try:
-		mongo_client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-		mongo_client.admin.command("ping")
-		return mongo_client
-	except PyMongoError as exc:
-		raise RuntimeError(f"Failed to connect to MongoDB: {exc}") from exc
+_client = None
+_db = None
+users_collection = None
+lawyers_collection = None
 
 
-client = _create_mongo_client()
-db = client[DB_NAME]
+def _get_db():
+    global _client, _db, users_collection, lawyers_collection
+    if _db is not None:
+        return _db
 
-users_collection = db["users"]
-lawyers_collection = db["lawyers"]
+    if not MONGO_URI:
+        raise RuntimeError(
+            "MONGO_URI is not set. Add it as an environment variable."
+        )
 
-users_collection.create_index("email", unique=True)
+    try:
+        _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+        _client.admin.command("ping")
+        _db = _client[DB_NAME]
+        users_collection = _db["users"]
+        lawyers_collection = _db["lawyers"]
+        users_collection.create_index("email", unique=True)
+        return _db
+    except PyMongoError as exc:
+        raise RuntimeError(f"Failed to connect to MongoDB: {exc}") from exc
+
+
+def get_users_collection():
+    _get_db()
+    return users_collection
+
+
+def get_lawyers_collection():
+    _get_db()
+    return lawyers_collection
