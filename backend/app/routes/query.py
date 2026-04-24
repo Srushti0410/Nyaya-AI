@@ -8,6 +8,20 @@ from app.services.input_processor import enrich_query, extract_case_context
 
 router = APIRouter()
 
+GREETING_TOKENS = {
+    "hi", "hello", "hey", "hii", "heyy", "yo", "hola", "namaste", "sup"
+}
+
+
+def is_smalltalk_message(text: str) -> bool:
+    normalized = " ".join((text or "").lower().strip().split())
+    if not normalized:
+        return True
+    if len(normalized) <= 4 and normalized.isalpha():
+        return True
+    words = normalized.replace("!", "").replace("?", "").split()
+    return bool(words) and all(word in GREETING_TOKENS for word in words)
+
 
 def build_full_query(query: str, history: list[str] | None = None) -> str:
     """
@@ -37,6 +51,17 @@ def get_case_lawyers(full_query: str, history: list[str] | None = None) -> tuple
 @router.post("/ask")
 def ask(request: QueryRequest):
     try:
+        if is_smalltalk_message(request.query):
+            return {
+                "answer": (
+                    "I am here to help with your legal issue. Please share what happened, "
+                    "when it happened, and any messages or documents you have."
+                ),
+                "sources": [],
+                "issue_type": "",
+                "lawyers": [],
+            }
+
         full_query = build_full_query(request.query, request.history)
         issue_type, lawyers = get_case_lawyers(full_query, request.history)
 
@@ -76,6 +101,23 @@ def recommend(request: RecommendationRequest):
 @router.post("/pipeline")
 def pipeline(request: QueryRequest):
     try:
+        if is_smalltalk_message(request.query):
+            return {
+                "answer": (
+                    "I am here to help with your legal issue. Please share what happened, "
+                    "when it happened, and any messages or documents you have."
+                ),
+                "sources": [],
+                "summary": {
+                    "issue_type": "general legal issue",
+                    "summary": "Please provide your legal situation so I can summarize it accurately.",
+                    "key_points": ["Tell me the core incident and timeline."],
+                    "suggested_action": "Share details and available evidence to get precise guidance.",
+                },
+                "issue_type": "",
+                "lawyers": [],
+            }
+
         full_query = build_full_query(request.query, request.history)
         issue_type, lawyers = get_case_lawyers(full_query, request.history)
 
